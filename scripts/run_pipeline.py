@@ -29,12 +29,21 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Optional language code for the synthesized narration.",
     )
+    parser.add_argument(
+        "--translation-instruction",
+        type=str,
+        default=None,
+        help="Optional instruction for GPT-4o to refine or personalize transcript text before TTS.",
+    )
     return parser.parse_args()
 
 
 async def main(args: argparse.Namespace) -> None:
     settings = Settings.from_env()
     settings.target_language = args.language or settings.target_language
+    settings.translation_instruction = (
+        args.translation_instruction or settings.translation_instruction
+    )
 
     pipeline = VideoDubbingPipeline(settings)
 

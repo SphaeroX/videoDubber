@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Iterable, List, Sequence
@@ -9,6 +10,7 @@ from typing import Iterable, List, Sequence
 import ffmpeg
 
 from ..models import TranscriptSegment
+from ..utils import save_prompt
 from .openai_client import OpenAIClient
 
 
@@ -28,6 +30,22 @@ class TranscriptionService:
             raise FileNotFoundError(f"Audio file not found: {audio_path}")
 
         response_format = self._response_format_for_model(self._model)
+
+        save_prompt(
+            audio_path.parent,
+            category="transcription",
+            name=audio_path.stem or "request",
+            content=json.dumps(
+                {
+                    "model": self._model,
+                    "response_format": response_format,
+                    "file": audio_path.name,
+                },
+                indent=2,
+                ensure_ascii=False,
+            ),
+            suffix="json",
+        )
 
         with audio_path.open("rb") as handle:
             response = await self._client.client.audio.transcriptions.create(

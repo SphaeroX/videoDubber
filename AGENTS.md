@@ -30,14 +30,17 @@ When new mechanisms are added or the project is extended, always update the `AGE
 - Default configuration uses `gpt-4o-transcribe`, `gpt-4o-mini-tts`, and a maximum concurrency of 10.
 
 ## Implementation Notes (2025-10-13)
-- `VideoDubbingPipeline` runs end-to-end: audio extraction → transcription → streaming TTS rendering → video assembly with synthesized tracks.  
+- `VideoDubbingPipeline` runs end-to-end: audio extraction -> transcription -> streaming TTS rendering -> video assembly with synthesized tracks.  
 - `AudioWorkspace` stores intermediate data in `TEMP_DIR/<video_stem>/`, extracts source audio via MoviePy, and prepares segment exports when transcript JSONs are available.  
 - `TextToSpeechService` streams GPT-4o Mini TTS output per transcript segment and writes PCM WAV files; tasks are throttled using `bounded_gather` to honor `MAX_CONCURRENCY`.  
 - `VideoEditor` removes audio losslessly with ffmpeg, mixes rendered clips via Pydub, and remuxes a normalized 44.1 kHz stereo track with ffmpeg. MoviePy is no longer used for the final mux step.  
 - MoviePy 2.x deprecated the `moviepy.editor` convenience module; imports now use `from moviepy import VideoFileClip, AudioFileClip`.  
 - Python 3.13 removed the stdlib `audioop`, so the project depends on `audioop-lts` to keep Pydub waveform utilities functional.  
-- GPT-4o Transcribe only supports `response_format="json"`; when timestamps are missing, sentence-level segments are approximated by splitting the transcript and distributing source audio duration proportionally.
+- GPT-4o Transcribe only supports `response_format='json'`; when timestamps are missing, sentence-level segments are approximated by splitting the transcript and distributing source audio duration proportionally.  
+- `Settings.translation_instruction` (optional) feeds an extra rewrite prompt into the GPT-4o translation pass so text can be polished or restyled even when the target language stays the same. The translation call now also returns a summarized TTS directive that is forwarded to the Mini TTS service, so manual `TTS_INSTRUCTION` overrides are only needed for hard overrides.
+- All prompts sent to OpenAI services are snapshotted under `TEMP_DIR/<video>/prompts/<category>/` via `utils.save_prompt`, covering transcription setup, translation requests, and each TTS segment for auditability.
 
 ## CLI Notes (2025-10-13)
 - `scripts/run_pipeline.py` requires `-i/--input` to specify the source video and outputs the dubbed version beside it using `<stem>.dubbed<suffix>`.  
-- Passing `-l/--language` sets `Settings.target_language`; when provided, the pipeline translates transcript segments with the `gpt-4o` chat model before TTS synthesis so the generated speech uses the requested language automatically.
+- Passing `-l/--language` sets `Settings.target_language`; when provided, the pipeline translates transcript segments with the `gpt-4o` chat model before TTS synthesis so the generated speech uses the requested language automatically.  
+- `--translation-instruction` overrides `Settings.translation_instruction`, allowing per-run guidance such as 'simplify wording' or 'make it child-friendly'; the same instruction can also be configured via the `TRANSLATION_INSTRUCTION` environment variable.

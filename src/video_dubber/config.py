@@ -14,9 +14,10 @@ class Settings:
     openai_api_key: str
     transcription_model: str = "gpt-4o-transcribe"
     translation_model: str = "gpt-4o"
+    translation_instruction: str | None = None
     tts_model: str = "gpt-4o-mini-tts"
     tts_voice: str = "alloy"
-    tts_instruction: str = "Sprich klar, freundlich und ohne Hintergrundgeraeusche."
+    tts_instruction: str | None = None
     target_language: str | None = None
     max_concurrency: int = 10
     temp_dir: Path = Path("artifacts")
@@ -27,12 +28,10 @@ class Settings:
 
         return cls(
             openai_api_key=os.getenv("OPENAI_API_KEY", ""),
-            tts_instruction=os.getenv(
-                "TTS_INSTRUCTION",
-                "Sprich klar, freundlich und ohne Hintergrundgeraeusche.",
-            ),
             translation_model=os.getenv("TRANSLATION_MODEL", "gpt-4o"),
+            translation_instruction=os.getenv("TRANSLATION_INSTRUCTION") or None,
             tts_voice=os.getenv("TTS_VOICE", "alloy"),
+            tts_instruction=os.getenv("TTS_INSTRUCTION") or None,
             target_language=os.getenv("TARGET_LANGUAGE") or None,
             max_concurrency=int(os.getenv("MAX_CONCURRENCY", "10")),
             temp_dir=Path(os.getenv("TEMP_DIR", "artifacts")),

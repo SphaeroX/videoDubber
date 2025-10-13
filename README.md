@@ -27,8 +27,8 @@ pip install -e .
 Provide the required environment variables (or create a `.env` file in the project root):
 ```bash
 setx OPENAI_API_KEY "sk-..."
-setx TTS_INSTRUCTION "Speak clearly, warmly."
 setx TRANSLATION_MODEL "gpt-4o"
+setx TRANSLATION_INSTRUCTION "Fix grammar but keep the speaker's tone."
 setx TTS_VOICE "alloy"
 setx MAX_CONCURRENCY "10"
 setx TEMP_DIR "artifacts"
@@ -38,12 +38,14 @@ setx TEMP_DIR "artifacts"
 When using a `.env` file on Windows, keep the classic `VAR=value` format so `python-dotenv` can load the values correctly:
 ```env
 OPENAI_API_KEY=sk-...
-TTS_INSTRUCTION=Speak clearly, warmly and without background noise.
 TRANSLATION_MODEL=gpt-4o
+TRANSLATION_INSTRUCTION=Fix grammar but keep the speaker's tone.
 TTS_VOICE=alloy
 MAX_CONCURRENCY=10
 TEMP_DIR=artifacts
 ```
+
+`translation_instruction` prompts GPT-4o to polish the transcript and now doubles as guidance for synthesizing speech. The pipeline automatically asks GPT-4o to summarize the desired tone and pacing for TTS; set `TTS_INSTRUCTION` only if you need to hard-override the generated directive.
 
 ## Usage
 1. Place the video to be processed (for example `demo.mp4`) inside the project directory.
@@ -56,7 +58,12 @@ TEMP_DIR=artifacts
    ```bash
    python scripts/run_pipeline.py -i demo.mp4 -l en
    ```
-4. The script saves the dubbed video next to the source file (for example `demo.dubbed.mp4`).
+4. Provide GPT-4o with extra rewriting guidance (for example to simplify the transcript) using:
+   ```bash
+   python scripts/run_pipeline.py -i demo.mp4 --translation-instruction "Rewrite in child-friendly German."
+   ```
+   Combine `--language` and `--translation-instruction` to translate and tweak the style in one pass.
+5. The script saves the dubbed video next to the source file (for example `demo.dubbed.mp4`).
 
 ## Demo
 The repository ships with a sample before/after pair you can open locally:
