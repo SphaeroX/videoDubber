@@ -26,6 +26,7 @@ class TranslationService:
         target_language: str | None = None,
         instruction: str | None = None,
         prompt_root: Path | None = None,
+        force_instruction: bool = False,
     ) -> tuple[list[TranscriptSegment], str | None]:
         """Translate each segment text into the desired language.
 
@@ -40,7 +41,10 @@ class TranslationService:
         target_language = (target_language or "").strip()
         instruction = (instruction or "").strip()
         if not target_language and not instruction:
-            return segment_list, None
+            if not force_instruction:
+                return segment_list, None
+            # When no translation or rewrite guidance is provided but a speech instruction is
+            # required, keep the text untouched while requesting a tone directive from GPT-4o.
 
         payload = {
             "segments": [
@@ -49,6 +53,8 @@ class TranslationService:
             ],
             "expect_speech_instruction": True,
         }
+        if force_instruction and not target_language and not instruction:
+            payload["preserve_text"] = True
 
         if target_language:
             payload["target_language"] = target_language
@@ -59,6 +65,7 @@ class TranslationService:
             "model": self._model,
             "target_language": target_language or None,
             "instruction": instruction or None,
+            "force_instruction": force_instruction or None,
             "payload": payload,
         }
         save_prompt(
@@ -81,6 +88,8 @@ class TranslationService:
                                 "You rewrite transcript segments. When 'target_language' is present you must translate "
                                 "each segment into that language. When 'instruction' is provided, follow it closely "
                                 "while keeping the meaning of each segment. Always preserve speaker intent and timing. "
+                                "If neither 'target_language' nor 'instruction' is supplied but 'preserve_text' is true, "
+                                "return the original text unchanged for each segment. "
                                 "Return a JSON object with keys 'segments' and 'speech_instruction'. The 'segments' "
                                 "value must be an array of objects with keys 'index' and 'translation', matching the "
                                 "order of the provided segments without extra commentary. The 'speech_instruction' "

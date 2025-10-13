@@ -16,8 +16,6 @@ from .openai_client import OpenAIClient
 class TextToSpeechService:
     """Render transcript segments as speech audio."""
 
-    _DEFAULT_INSTRUCTION = "Sprich klar, freundlich und ohne Hintergrundgeraeusche."
-
     def __init__(
         self,
         client: OpenAIClient,
@@ -41,8 +39,7 @@ class TextToSpeechService:
         output_dir.mkdir(parents=True, exist_ok=True)
 
         applied_instruction = (instruction_override or "").strip() or self._instruction
-        if not applied_instruction:
-            applied_instruction = self._DEFAULT_INSTRUCTION
+        applied_instruction = applied_instruction.strip() if applied_instruction else None
 
         tasks: list[AudioRenderTask] = []
         for index, segment in enumerate(segments):
@@ -90,11 +87,16 @@ class TextToSpeechService:
             AudioSegment.silent(duration=duration_ms).export(str(task.output_path), format="wav")
             return task.output_path
 
+        request_args = {
+            "model": self._model,
+            "voice": task.voice,
+            "input": text,
+        }
+        if task.instruction:
+            request_args["instructions"] = task.instruction
+
         async with self._client.client.audio.speech.with_streaming_response.create(
-            model=self._model,
-            voice=task.voice,
-            input=text,
-            instructions=task.instruction,
+            **request_args
         ) as response:
             await response.stream_to_file(task.output_path)
 

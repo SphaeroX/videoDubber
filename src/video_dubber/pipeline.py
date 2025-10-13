@@ -105,8 +105,13 @@ class VideoDubbingPipeline:
         segment_list = list(segments)
         target_language = (self._settings.target_language or "").strip()
         instruction = (self._settings.translation_instruction or "").strip()
+        force_instruction = (self._settings.tts_instruction or "").strip() == ""
 
-        if not segment_list or not (target_language or instruction):
+        if not segment_list:
+            return segment_list, None
+
+        request_instructions = bool(target_language or instruction or force_instruction)
+        if not request_instructions:
             return segment_list, None
 
         translated_segments, tts_instruction = await self._translation.translate_segments(
@@ -114,6 +119,7 @@ class VideoDubbingPipeline:
             target_language=target_language or None,
             instruction=instruction or None,
             prompt_root=self._run_root,
+            force_instruction=force_instruction,
         )
         return translated_segments, tts_instruction
 
@@ -132,7 +138,7 @@ class VideoDubbingPipeline:
         render_tasks = await self._tts.create_render_tasks(
             segment_list,
             output_root / "tts",
-            instruction_override=tts_instruction or self._settings.tts_instruction,
+            instruction_override=self._settings.tts_instruction or tts_instruction,
         )
 
         await bounded_gather(

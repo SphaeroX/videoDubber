@@ -26,7 +26,7 @@ class AudioRenderTask:
     """Describes an audio clip that needs to be synthesized."""
 
     segment: TranscriptSegment
-    instruction: str
+    instruction: str | None
     voice: str
     output_path: Path
 

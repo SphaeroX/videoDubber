@@ -38,6 +38,7 @@ When new mechanisms are added or the project is extended, always update the `AGE
 - Python 3.13 removed the stdlib `audioop`, so the project depends on `audioop-lts` to keep Pydub waveform utilities functional.  
 - GPT-4o Transcribe only supports `response_format='json'`; when timestamps are missing, sentence-level segments are approximated by splitting the transcript and distributing source audio duration proportionally.  
 - `Settings.translation_instruction` (optional) feeds an extra rewrite prompt into the GPT-4o translation pass so text can be polished or restyled even when the target language stays the same. The translation call now also returns a summarized TTS directive that is forwarded to the Mini TTS service, so manual `TTS_INSTRUCTION` overrides are only needed for hard overrides.
+- When no `TTS_INSTRUCTION` override is supplied, the translation service still calls GPT-4o to derive a speech directive while leaving the transcript text unchanged, ensuring TTS guidance is always informed by the source content.
 - All prompts sent to OpenAI services are snapshotted under `TEMP_DIR/<video>/prompts/<category>/` via `utils.save_prompt`, covering transcription setup, translation requests, and each TTS segment for auditability.
 
 ## CLI Notes (2025-10-13)

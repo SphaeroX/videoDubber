@@ -68,19 +68,6 @@ TEMP_DIR=artifacts
 ## Demo
 The repository ships with a sample before/after pair you can open locally:
 
-<figure>
-  <figcaption>Before: original narration (`demo.mp4`).</figcaption>
-  <video controls src="demo.mp4">
-    Sorry, your browser cannot play this embedded video. Download <a href="demo.mp4">demo.mp4</a>.
-  </video>
-</figure>
-
-<figure>
-  <figcaption>After: dubbed output lang "it" (`demo.dubbed.mp4`).</figcaption>
-  <video controls src="demo.dubbed.mp4">
-    Sorry, your browser cannot play this embedded video. Download <a href="demo.dubbed.mp4">demo.dubbed.mp4</a>.
-  </video>
-</figure>
 
 ## Extending
 - Modify `src/video_dubber/pipeline.py` to plug in additional processing steps.
