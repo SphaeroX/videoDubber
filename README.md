@@ -1,4 +1,4 @@
-# Video Dubber
+﻿# Video Dubber
 
 Async Python pipeline that replaces the audio track of a recorded video with a clean GPT-4o voiceover generated from the original speech.
 
@@ -27,7 +27,7 @@ pip install -e .
 Provide the required environment variables (or create a `.env` file in the project root):
 ```bash
 setx OPENAI_API_KEY "sk-..."
-setx TTS_INSTRUCTION "Speak clearly, warmly, and without background noise."
+setx TTS_INSTRUCTION "Speak clearly, warmly."
 setx TRANSLATION_MODEL "gpt-4o"
 setx TTS_VOICE "alloy"
 setx MAX_CONCURRENCY "10"
@@ -61,14 +61,19 @@ TEMP_DIR=artifacts
 ## Demo
 The repository ships with a sample before/after pair you can open locally:
 
-- `demo.mp4` – original recording with the captured narration.
+<figure>
+  <figcaption>Before: original narration (`demo.mp4`).</figcaption>
   <video controls src="demo.mp4">
-    Sorry, your browser can’t play this embedded video. Download <a href="demo.mp4">demo.mp4</a>.
+    Sorry, your browser cannot play this embedded video. Download <a href="demo.mp4">demo.mp4</a>.
   </video>
-- `demo.dubbed.mp4` – dubbed output produced by the pipeline.
+</figure>
+
+<figure>
+  <figcaption>After: dubbed output lang "it" (`demo.dubbed.mp4`).</figcaption>
   <video controls src="demo.dubbed.mp4">
-    Sorry, your browser can’t play this embedded video. Download <a href="demo.dubbed.mp4">demo.dubbed.mp4</a>.
+    Sorry, your browser cannot play this embedded video. Download <a href="demo.dubbed.mp4">demo.dubbed.mp4</a>.
   </video>
+</figure>
 
 ## Extending
 - Modify `src/video_dubber/pipeline.py` to plug in additional processing steps.
