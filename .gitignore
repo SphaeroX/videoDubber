@@ -1,0 +1,57 @@
+# Environment files
+*.env
+.env
+.env.*
+.envrc
+.env.local
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.so
+
+# Tool caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+coverage/
+
+# Build artifacts
+artifacts/
+build/
+dist/
+site/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+temp/
+tmp/
+
+# Generated media
+*.transcribed.mp4
+*.transcribed.mkv
+*.transcribed.mov
+*.transcribed.webm
