@@ -42,6 +42,12 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Path to a custom transcript file (JSON) to use instead of generating one.",
     )
+    parser.add_argument(
+        "--noise-floor",
+        type=int,
+        default=None,
+        help="Noise floor in dB for noise reduction (default: -25). Lower values mean less aggressive reduction.",
+    )
     return parser.parse_args()
 
 
@@ -53,12 +59,15 @@ async def main(args: argparse.Namespace) -> None:
     )
     if args.transcript:
         settings.transcript_path = args.transcript
+    if args.noise_floor is not None:
+        settings.noise_floor_db = args.noise_floor
 
     pipeline = VideoDubbingPipeline(settings)
 
     source_video = args.input
+    lang_suffix = f".{settings.target_language}" if settings.target_language else ""
     output_video = source_video.with_name(
-        f"{source_video.stem}.dubbed{source_video.suffix}"
+        f"{source_video.stem}.dubbed{lang_suffix}{source_video.suffix}"
     )
 
     await pipeline.run(source_video=source_video, output_video=output_video)

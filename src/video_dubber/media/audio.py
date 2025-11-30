@@ -44,7 +44,7 @@ class AudioWorkspace:
 
         return audio_path
 
-    def denoise_audio(self, audio_path: Path) -> Path:
+    def denoise_audio(self, audio_path: Path, noise_floor_db: int = -25) -> Path:
         """Apply noise reduction to an audio file using ffmpeg afftdn filter."""
 
         denoised_path = audio_path.with_name(f"{audio_path.stem}_denoised{audio_path.suffix}")
@@ -61,7 +61,7 @@ class AudioWorkspace:
             "ffmpeg",
             "-y",
             "-i", str(audio_path),
-            "-af", "afftdn=nf=-25", # nf (noise floor) in dB, adjustable. -25 is a reasonable default.
+            "-af", f"afftdn=nf={noise_floor_db}", # nf (noise floor) in dB, adjustable.
             str(denoised_path)
         ]
         

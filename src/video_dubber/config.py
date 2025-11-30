@@ -25,6 +25,8 @@ class Settings:
     transcript_path: Path | None = None
     enable_noise_filter: bool = True
 
+    noise_floor_db: int = -25
+
     @classmethod
     def from_env(cls) -> "Settings":
         """Create settings using environment defaults."""
@@ -40,4 +42,5 @@ class Settings:
             max_speedup_factor=float(os.getenv("MAX_SPEEDUP_FACTOR", "1.3")),
             temp_dir=Path(os.getenv("TEMP_DIR", "artifacts")),
             enable_noise_filter=os.getenv("ENABLE_NOISE_FILTER", "true").lower() == "true",
+            noise_floor_db=int(os.getenv("NOISE_FLOOR_DB", "-25")),
         )

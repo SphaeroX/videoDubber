@@ -96,7 +96,7 @@ class VideoDubbingPipeline:
         self._run_root = audio_path.parent
         
         if self._settings.enable_noise_filter:
-            audio_path = await asyncio.to_thread(self._workspace.denoise_audio, audio_path)
+            audio_path = await asyncio.to_thread(self._workspace.denoise_audio, audio_path, self._settings.noise_floor_db)
             
         return audio_path
 
@@ -148,9 +148,14 @@ class VideoDubbingPipeline:
             return []
 
         output_root = self._run_root or (self._settings.temp_dir / "renders")
+        
+        # Namespace by language to avoid caching issues when switching languages
+        lang_code = self._settings.target_language or "original"
+        tts_output_dir = output_root / "tts" / lang_code
+        
         render_tasks = await self._tts.create_render_tasks(
             segment_list,
-            output_root / "tts",
+            tts_output_dir,
             instruction_override=self._settings.tts_instruction or tts_instruction,
         )
 
