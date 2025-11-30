@@ -2,6 +2,10 @@
 
 This tool is designed to re-voice recorded videos. The original audio track is removed and replaced with an AI-generated voice without background noise. The OpenAI API is used for transcription, translation, and speech synthesis.
 
+> [!IMPORTANT]
+> Before running any scripts or tests, you must always activate the virtual environment first:
+> `.venv\Scripts\activate`
+
 ## How It Works
 1. The video file (e.g., `demo.mp4`) is loaded and the audio track is extracted.  
 2. GPT-4o Transcribe creates a transcript.  
