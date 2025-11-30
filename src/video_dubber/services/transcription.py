@@ -6,6 +6,8 @@ import json
 import re
 from pathlib import Path
 from typing import Iterable, List, Sequence
+import logging
+import asyncio
 
 import ffmpeg
 
@@ -29,6 +31,16 @@ class TranscriptionService:
         if not audio_path.exists():
             raise FileNotFoundError(f"Audio file not found: {audio_path}")
 
+        # Idempotency: Check for existing transcript
+        transcript_cache_path = audio_path.with_suffix(".transcript.json")
+        if transcript_cache_path.exists():
+            try:
+                with transcript_cache_path.open("r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    return [TranscriptSegment(**item) for item in data]
+            except Exception as e:
+                logging.warning(f"Failed to load cached transcript: {e}")
+
         response_format = self._response_format_for_model(self._model)
 
         save_prompt(
@@ -48,11 +60,26 @@ class TranscriptionService:
         )
 
         with audio_path.open("rb") as handle:
-            response = await self._client.client.audio.transcriptions.create(
-                model=self._model,
-                file=handle,
-                response_format=response_format,
-            )
+            # Retry logic for 500 errors
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    response = await self._client.client.audio.transcriptions.create(
+                        model=self._model,
+                        file=handle,
+                        response_format=response_format,
+                    )
+                    break
+                except Exception as e:
+                    is_server_error = "500" in str(e) or (hasattr(e, "status_code") and e.status_code >= 500)
+                    if is_server_error and attempt < max_retries - 1:
+                        wait_time = 2 ** attempt
+                        logging.warning(f"OpenAI 500 error: {e}. Retrying in {wait_time}s...")
+                        await asyncio.sleep(wait_time)
+                        # Re-open file handle for retry as it might be consumed
+                        handle.seek(0)
+                        continue
+                    raise
 
         raw_segments: Sequence[dict[str, object]] = []
         transcript_text = ""
@@ -74,6 +101,13 @@ class TranscriptionService:
 
         if not segments and transcript_text:
             segments = self._approximate_segments(audio_path, transcript_text)
+
+        # Cache the result
+        try:
+            with transcript_cache_path.open("w", encoding="utf-8") as f:
+                json.dump([{"start": s.start, "end": s.end, "text": s.text} for s in segments], f, indent=2)
+        except Exception as e:
+            logging.warning(f"Failed to cache transcript: {e}")
 
         return segments
 

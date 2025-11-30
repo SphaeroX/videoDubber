@@ -63,7 +63,19 @@ TEMP_DIR=artifacts
    python scripts/run_pipeline.py -i demo.mp4 --translation-instruction "Rewrite in child-friendly German."
    ```
    Combine `--language` and `--translation-instruction` to translate and tweak the style in one pass.
-5. The script saves the dubbed video next to the source file (for example `demo.dubbed.mp4`).
+5. Use a custom transcript file (bypassing transcription) using the `-t` / `--transcript` argument:
+   ```bash
+   python scripts/run_pipeline.py -i demo.mp4 -t my_transcript.json
+   ```
+6. The script saves the dubbed video next to the source file (for example `demo.dubbed.mp4`).
+
+## CLI Arguments
+| Argument | Description |
+| :--- | :--- |
+| `-i`, `--input` | Path to the source video file (Required). |
+| `-l`, `--language` | Optional language code for the synthesized narration. |
+| `--translation-instruction` | Optional instruction for GPT-4o to refine or personalize transcript text before TTS. |
+| `-t`, `--transcript` | Path to a custom transcript file (JSON) to use instead of generating one. |
 
 ## Demo
 The repository ships with a sample before/after pair you can open locally:

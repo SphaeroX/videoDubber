@@ -30,14 +30,15 @@ class AudioWorkspace:
         """Extract raw audio from a video file."""
 
         root = self._video_root(video_path)
-        audio_path = root / f"{video_path.stem}.wav"
+        root = self._video_root(video_path)
+        audio_path = root / f"{video_path.stem}.mp3"
 
         clip = VideoFileClip(str(video_path))
         try:
             audio = clip.audio
             if audio is None:
                 raise ValueError(f"No audio track found in {video_path}")
-            audio.write_audiofile(str(audio_path), codec="pcm_s16le", fps=44100, logger=None)
+            audio.write_audiofile(str(audio_path), codec="libmp3lame", bitrate="192k", logger=None)
         finally:
             clip.close()
 
@@ -59,9 +60,12 @@ class AudioWorkspace:
         if not raw_segments:
             return []
 
-        audio_source = transcript_path.with_suffix(".wav")
+        audio_source = transcript_path.with_suffix(".mp3")
         if not audio_source.exists():
-            return []
+            # Fallback to wav if mp3 is missing
+            audio_source = transcript_path.with_suffix(".wav")
+            if not audio_source.exists():
+                return []
 
         audio = AudioSegment.from_file(audio_source)
         segment_dir = transcript_path.parent / "segments"

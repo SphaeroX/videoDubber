@@ -20,7 +20,9 @@ class Settings:
     tts_instruction: str | None = None
     target_language: str | None = None
     max_concurrency: int = 10
+    max_speedup_factor: float = 3.0
     temp_dir: Path = Path("artifacts")
+    transcript_path: Path | None = None
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -34,5 +36,6 @@ class Settings:
             tts_instruction=os.getenv("TTS_INSTRUCTION") or None,
             target_language=os.getenv("TARGET_LANGUAGE") or None,
             max_concurrency=int(os.getenv("MAX_CONCURRENCY", "10")),
+            max_speedup_factor=float(os.getenv("MAX_SPEEDUP_FACTOR", "1.3")),
             temp_dir=Path(os.getenv("TEMP_DIR", "artifacts")),
         )

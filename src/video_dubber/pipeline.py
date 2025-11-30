@@ -15,6 +15,7 @@ from .models import (
     TranscriptSegment,
     VideoAssemblyPlan,
 )
+import json
 from .services.openai_client import OpenAIClient
 from .services.transcription import TranscriptionService
 from .services.translation import TranslationService
@@ -37,6 +38,7 @@ class VideoDubbingPipeline:
             settings.tts_model,
             settings.tts_voice,
             settings.tts_instruction,
+            settings.max_speedup_factor,
         )
         self._run_root: Path | None = None
 
@@ -59,7 +61,14 @@ class VideoDubbingPipeline:
             raise FileNotFoundError(f"Source video not found: {source_video}")
 
         extracted_audio = await self.extract_audio(source_video)
-        segments = await self.transcribe_audio(extracted_audio)
+
+        if self._settings.transcript_path and self._settings.transcript_path.exists():
+            with open(self._settings.transcript_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                segments = [TranscriptSegment(**item) for item in data]
+        else:
+            segments = await self.transcribe_audio(extracted_audio)
+
         segments, tts_instruction = await self.translate_segments_if_needed(segments)
         render_tasks = await self.render_audio_segments(segments, tts_instruction)
 

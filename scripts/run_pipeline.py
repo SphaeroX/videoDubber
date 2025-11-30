@@ -35,6 +35,13 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Optional instruction for GPT-4o to refine or personalize transcript text before TTS.",
     )
+    parser.add_argument(
+        "-t",
+        "--transcript",
+        type=Path,
+        default=None,
+        help="Path to a custom transcript file (JSON) to use instead of generating one.",
+    )
     return parser.parse_args()
 
 
@@ -44,6 +51,8 @@ async def main(args: argparse.Namespace) -> None:
     settings.translation_instruction = (
         args.translation_instruction or settings.translation_instruction
     )
+    if args.transcript:
+        settings.transcript_path = args.transcript
 
     pipeline = VideoDubbingPipeline(settings)
 
