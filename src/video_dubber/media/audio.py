@@ -44,6 +44,37 @@ class AudioWorkspace:
 
         return audio_path
 
+    def denoise_audio(self, audio_path: Path) -> Path:
+        """Apply noise reduction to an audio file using ffmpeg afftdn filter."""
+
+        denoised_path = audio_path.with_name(f"{audio_path.stem}_denoised{audio_path.suffix}")
+        
+        # Use ffmpeg with afftdn filter for noise reduction
+        # afftdn is effective for stationary noise like fans
+        clip = AudioSegment.from_file(audio_path)
+        
+        # We use a temporary file for the ffmpeg output because pydub doesn't support complex filters directly easily
+        # But actually, calling ffmpeg directly via subprocess is cleaner for this specific filter
+        import subprocess
+        
+        cmd = [
+            "ffmpeg",
+            "-y",
+            "-i", str(audio_path),
+            "-af", "afftdn=nf=-25", # nf (noise floor) in dB, adjustable. -25 is a reasonable default.
+            str(denoised_path)
+        ]
+        
+        try:
+            subprocess.run(cmd, check=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            # Fallback or just return original if ffmpeg fails (e.g. filter not present)
+            # But we verified ffmpeg is present.
+            print(f"Warning: Noise reduction failed: {e}")
+            return audio_path
+
+        return denoised_path
+
     def segment(self, transcript_path: Path) -> list[Path]:
         """Split audio into segments according to a transcript."""
 

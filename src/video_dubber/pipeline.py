@@ -94,6 +94,10 @@ class VideoDubbingPipeline:
 
         audio_path = await asyncio.to_thread(self._workspace.extract, source_video)
         self._run_root = audio_path.parent
+        
+        if self._settings.enable_noise_filter:
+            audio_path = await asyncio.to_thread(self._workspace.denoise_audio, audio_path)
+            
         return audio_path
 
     async def transcribe_audio(self, audio_path: Path) -> list[TranscriptSegment]:
