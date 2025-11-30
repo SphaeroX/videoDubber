@@ -76,6 +76,10 @@ TEMP_DIR=artifacts
 | `-l`, `--language` | Optional language code for the synthesized narration. |
 | `--translation-instruction` | Optional instruction for GPT-4o to refine or personalize transcript text before TTS. |
 | `-t`, `--transcript` | Path to a custom transcript file (JSON) to use instead of generating one. |
+| `--noise-floor` | Noise floor in dB for noise reduction (default: -25). Lower values mean less aggressive reduction. |
+
+## Output
+The script saves the dubbed video next to the source file with the language code included (e.g., `demo.dubbed.de.mp4` or `demo.dubbed.mp4` if no language specified).
 
 ## Demo
 The repository ships with a sample before/after pair you can open locally:

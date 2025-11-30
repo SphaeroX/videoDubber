@@ -31,16 +31,6 @@ class TranscriptionService:
         if not audio_path.exists():
             raise FileNotFoundError(f"Audio file not found: {audio_path}")
 
-        # Idempotency: Check for existing transcript
-        transcript_cache_path = audio_path.with_suffix(".transcript.json")
-        if transcript_cache_path.exists():
-            try:
-                with transcript_cache_path.open("r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    return [TranscriptSegment(**item) for item in data]
-            except Exception as e:
-                logging.warning(f"Failed to load cached transcript: {e}")
-
         response_format = self._response_format_for_model(self._model)
 
         save_prompt(
