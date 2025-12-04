@@ -93,6 +93,7 @@ class TranscriptionService:
             segments = self._approximate_segments(audio_path, transcript_text)
 
         # Cache the result
+        transcript_cache_path = audio_path.with_suffix(".transcript.json")
         try:
             with transcript_cache_path.open("w", encoding="utf-8") as f:
                 json.dump([{"start": s.start, "end": s.end, "text": s.text} for s in segments], f, indent=2)

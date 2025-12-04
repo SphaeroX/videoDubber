@@ -113,7 +113,7 @@ class TextToSpeechService:
             current_duration = float(probe["format"]["duration"])
             target_duration = task.segment.end - task.segment.start
 
-            if current_duration > target_duration:
+            if target_duration > 0.001 and current_duration > target_duration:
                 speedup_factor = current_duration / target_duration
                 # Limit the speedup factor
                 effective_speedup = min(speedup_factor, self._max_speedup_factor)

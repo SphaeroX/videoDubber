@@ -1,0 +1,277 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.138905314487633,
+    "text": "Im Vergleich haben wir hier einmal den Metro X gegen den Rocket von Shining."
+  },
+  {
+    "start": 7.138905314487633,
+    "end": 18.69265996819788,
+    "text": "Was dazu zu sagen ist, der Rocket ist nat\u00fcrlich doppelt so teuer wie der Metro X und beide k\u00f6nnen ihre Scans fertig machen."
+  },
+  {
+    "start": 18.69265996819788,
+    "end": 31.37361019787986,
+    "text": "Unten sieht man jetzt die Vorschau von dem Metro X, er scannt noch nicht, beim Shining stelle ich hier auch noch die Einstellungen ein."
+  },
+  {
+    "start": 31.37361019787986,
+    "end": 68.38319827561837,
+    "text": "Der Scan ist jetzt gestartet beim RevoPoint und beim Shining auch und die Aufl\u00f6sung ist beides mal die gleiche, das hei\u00dft die Darstellung wird deutlicher sichtbar, wenn diese Aufl\u00f6sung erreicht ist und da punktet nat\u00fcrlich der Rocket, da er viel mehr Laserlinien hat, aber auch beim Metro X erkennt man den Scan schon ganz gut, die Oberfl\u00e4che zumindest und das Setup war beides mal das gleiche."
+  },
+  {
+    "start": 68.38319827561837,
+    "end": 94.68442838162544,
+    "text": "Was mir noch so vorkommt ist, dass die Software beim Shining noch um einiges fl\u00fcssiger l\u00e4uft wie bei RevoPoint und zudem muss man dazu sagen, dass der Rocket auch Wireless scannt, das hei\u00dft ich habe kein Kabel verbunden, w\u00e4hrend der Metro X mit dem USB Kabel direkt verbunden ist."
+  },
+  {
+    "start": 94.68442838162544,
+    "end": 108.58650715194347,
+    "text": "Der Metro X liegt auch ein bisschen schwerer in der Hand, da er ein h\u00f6heres Gewicht hat, was man dann irgendwann nat\u00fcrlich auch im Handgelenk merkt."
+  },
+  {
+    "start": 108.58650715194347,
+    "end": 128.5002956607774,
+    "text": "Der Shining ist jetzt fertig mit dem ersten Scan, was ich hier ganz sch\u00f6n finde, ich kann die Marker ausw\u00e4hlen, um die Fl\u00e4che zu selektieren und den Unterboden wegzuschneiden, das klappt eigentlich sehr sehr gut."
+  },
+  {
+    "start": 128.5002956607774,
+    "end": 135.26346911660778,
+    "text": "Der Metro X scannt jetzt noch, w\u00e4hrend die erste Punktewolke fertig ist."
+  },
+  {
+    "start": 135.26346911660778,
+    "end": 147.00508969964665,
+    "text": "Was mich bei Metro X auch immer st\u00f6rt, dass wenn man den Winkel zu flach h\u00e4lt, dass er das Tracking mit den Markern verliert."
+  },
+  {
+    "start": 147.00508969964665,
+    "end": 156.21052023674912,
+    "text": "Theoretisch kann der Rocket sogar ohne Marker scannen, habe ich jetzt aber noch nicht so getestet."
+  },
+  {
+    "start": 156.21052023674912,
+    "end": 164.6644870565371,
+    "text": "Daf\u00fcr starte ich schon den zweiten Scan, ich habe das Objekt einmal umgedreht beim Rocket."
+  },
+  {
+    "start": 164.6644870565371,
+    "end": 176.6879065335689,
+    "text": "Man sieht jetzt auch hier bei dem Metro X ganz gut, dass es etwas l\u00e4nger dauert, bis die Fl\u00e4che seitlich genug Punktewolken hat."
+  },
+  {
+    "start": 176.6879065335689,
+    "end": 191.43538198586572,
+    "text": "Also gerade obendrauf kann man richtig gut scannen, aber wenn es dann darum geht, seitlich den Scanner zu halten, hat er dann immer so seine Einschr\u00e4nkungen."
+  },
+  {
+    "start": 191.43538198586572,
+    "end": 202.61340478091873,
+    "text": "Der Rocket ist jetzt schon bei der zweiten Runde fast fertig, w\u00e4hrend ich noch bei dem Metro X an der ersten Runde bin."
+  },
+  {
+    "start": 202.61340478091873,
+    "end": 213.79142757597174,
+    "text": "Und jetzt auch wieder bei Shining das Sch\u00f6ne, dass ich hier einfach die Fl\u00e4che selektieren kann anhand von den Markern."
+  },
+  {
+    "start": 213.79142757597174,
+    "end": 222.0575284664311,
+    "text": "Und der zweite Scan beim Shining ist fertig, w\u00e4hrend der erste noch bei Revopoint l\u00e4uft."
+  },
+  {
+    "start": 222.0575284664311,
+    "end": 234.64454573144877,
+    "text": "Auch hier die Punktewolke wird wieder erstellt und beides mal war das gleiche Setup am gleichen Laptop unter den gleichen Bedingungen."
+  },
+  {
+    "start": 234.64454573144877,
+    "end": 242.5349147632509,
+    "text": "So, bei dem Shining fange ich jetzt an mit der Positionierung der beiden Scans oben."
+  },
+  {
+    "start": 242.5349147632509,
+    "end": 247.701227819788,
+    "text": "Der Metro X hat seine erste Runde jetzt auch geschafft."
+  },
+  {
+    "start": 247.701227819788,
+    "end": 259.5367813674912,
+    "text": "Der Shining hat jetzt das komplette Modell zusammengemescht, das hei\u00dft wir haben zwei Scans genommen und diese zusammengef\u00fcgt."
+  },
+  {
+    "start": 259.5367813674912,
+    "end": 264.1283954674912,
+    "text": "Das hat auch sehr gut geglappt."
+  },
+  {
+    "start": 264.1283954674912,
+    "end": 268.7200095674912,
+    "text": "Und er macht jetzt da auch ein Mesh draus."
+  },
+  {
+    "start": 268.7200095674912,
+    "end": 273.31162366749123,
+    "text": "Ja, also der Shining w\u00e4re jetzt fertig."
+  },
+  {
+    "start": 273.31162366749123,
+    "end": 277.90323776749125,
+    "text": "Hier seht ihr den fertigen Scan."
+  },
+  {
+    "start": 277.90323776749125,
+    "end": 283.3513497180213,
+    "text": "Der Metro X tut noch seine erste Punktewolke verschmelzen."
+  },
+  {
+    "start": 283.3513497180213,
+    "end": 293.7779087957598,
+    "text": "Man sieht beim Shining auch richtig sch\u00f6n die Details, also selbst diesen Aufdruck vom Etikett finde ich super."
+  },
+  {
+    "start": 293.7779087957598,
+    "end": 304.0166019441697,
+    "text": "Man kann da jetzt noch ein bisschen rumspielen und noch ein paar Filter dr\u00fcber laufen lassen, wie man m\u00f6chte."
+  },
+  {
+    "start": 304.0166019441697,
+    "end": 310.49797650600715,
+    "text": "Aber eigentlich ist der Shining jetzt schon fertig nach 4 Minuten 30."
+  },
+  {
+    "start": 310.49797650600715,
+    "end": 318.7640773964665,
+    "text": "So, der Revopoint hat seine erste Punktewolke geschafft, zumindest mal die erste H\u00e4lfte."
+  },
+  {
+    "start": 318.7640773964665,
+    "end": 334.7326813893994,
+    "text": "An dieser Stelle w\u00fcrde ich dann jetzt auch einfach mal sagen, dass wir das Ganze vorspulen, da wir das ganze Prozedere jetzt auch noch f\u00fcr die andere Seite machen m\u00fcssen."
+  },
+  {
+    "start": 334.7326813893994,
+    "end": 345.53497232579514,
+    "text": "W\u00fcrde ich das Ganze, wie gesagt, vorspulen, bis wir die andere Seite auch einmal komplett fertig eingescannt haben."
+  },
+  {
+    "start": 345.53497232579514,
+    "end": 355.8675984388693,
+    "text": "Aber ihr seht schon, ihr werdet mit dem Metro X doppelt so lange f\u00fcr einen Scan brauchen, wie mit dem Shining."
+  },
+  {
+    "start": 355.8675984388693,
+    "end": 360.5642466720849,
+    "text": "Und die Details schauen wir uns dann auch noch an."
+  },
+  {
+    "start": 360.5642466720849,
+    "end": 366.10629158727926,
+    "text": "Wie gesagt, hier das Ganze ist um das Vierfache vorgespult."
+  },
+  {
+    "start": 366.10629158727926,
+    "end": 376.8146495590107,
+    "text": "Ihr w\u00fcrdet dann nochmal 6 Minuten f\u00fcr das ganze Prozedere brauchen, nur um die andere Seite auch noch zu bekommen."
+  },
+  {
+    "start": 376.8146495590107,
+    "end": 384.2353537674913,
+    "text": "So, dann wird auch wieder alles zugeschnitten und die Punktewolke verschmolzen."
+  },
+  {
+    "start": 384.2353537674913,
+    "end": 390.71672832932876,
+    "text": "So, nun haben wir zwei Punktewolken, wie wir schon beim Shining auch."
+  },
+  {
+    "start": 390.71672832932876,
+    "end": 397.8556336438164,
+    "text": "Und was man jetzt machen muss, ist nat\u00fcrlich die beiden Teile zusammenf\u00fcgen."
+  },
+  {
+    "start": 397.8556336438164,
+    "end": 410.3487179441698,
+    "text": "Das geht mit dem Revopoint mittlerweile auch sehr gut, solange die \u00fcberlappende Oberfl\u00e4che genug Details hat, damit die Software bzw."
+  },
+  {
+    "start": 410.3487179441698,
+    "end": 416.73615954134294,
+    "text": "der Algorithmus dann auch die Teile richtig positionieren kann, bzw."
+  },
+  {
+    "start": 416.73615954134294,
+    "end": 421.32777364134296,
+    "text": "erstmal ausrichten und dann positionieren."
+  },
+  {
+    "start": 421.32777364134296,
+    "end": 430.72107010777404,
+    "text": "Daraus wird dann eine neue Punktewolke generiert und die muss man dann auch noch zum Mesh umwandeln."
+  },
+  {
+    "start": 430.72107010777404,
+    "end": 435.31268420777405,
+    "text": "Das habe ich beim Shining schon gemacht."
+  },
+  {
+    "start": 435.31268420777405,
+    "end": 442.6394554515903,
+    "text": "Wie gesagt, alles in der Zeit, wo wir uns jetzt hier den Revopoint betrachten."
+  },
+  {
+    "start": 442.6394554515903,
+    "end": 454.00534417597197,
+    "text": "Hier auch wieder das Ganze, was man eigentlich automatisieren k\u00f6nnte, dass die \u00dcberlappungen automatisch entfernt werden."
+  },
+  {
+    "start": 454.00534417597197,
+    "end": 458.596958275972,
+    "text": "Und dann kommt am Ende der Mesh-Prozess."
+  },
+  {
+    "start": 458.596958275972,
+    "end": 468.45991956572465,
+    "text": "Der ist dann etwas schneller, weil durch die Fusionierung der Punktewolken werden viele Punkte reduziert."
+  },
+  {
+    "start": 468.45991956572465,
+    "end": 473.05153366572466,
+    "text": "Automatisch."
+  },
+  {
+    "start": 473.05153366572466,
+    "end": 477.6431477657247,
+    "text": "Das kann man auch leider nicht verhindern."
+  },
+  {
+    "start": 477.6431477657247,
+    "end": 484.87598604487664,
+    "text": "Manchmal hat man dann das Problem, dass dann auch die Details verloren gehen."
+  },
+  {
+    "start": 484.87598604487664,
+    "end": 489.46760014487666,
+    "text": "Aber der Scan sieht ganz ordentlich aus."
+  },
+  {
+    "start": 489.46760014487666,
+    "end": 499.04876254063635,
+    "text": "Man sieht ein bisschen die Laserlienien und das Etikett sieht man jetzt nicht so gut wie beim Shining."
+  },
+  {
+    "start": 499.04876254063635,
+    "end": 505.077551,
+    "text": "Trotzdem f\u00fcr Reverse Engineering, w\u00fcrde ich mal sagen, vollkommen ausreichend."
+  },
+  {
+    "start": 505.077551,
+    "end": 505.077551,
+    "text": "Und f\u00fcr das g\u00fcnstige Geld kann man sich eigentlich nicht beschweren."
+  },
+  {
+    "start": 505.077551,
+    "end": 505.077551,
+    "text": "Trotzdem w\u00fcrde ich immer zu dem Rocket greifen."
+  }
+]
